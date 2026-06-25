@@ -83,6 +83,10 @@ def run_analysis(symbol: str = "GC=F") -> dict | None:
             structure,
         )
 
+if resistance - support < 1:
+    print("[analyzer] Market too tight")
+    return None
+
         # Build trade plan
         trade_plan = None
         if signal == "BUY":
