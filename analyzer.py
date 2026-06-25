@@ -51,7 +51,7 @@ else:
 
 print(f"Trend: {trend}")
 
-signal, confidence = get_signal(
+signal, confidence, reasons = get_signal(
     latest["close"],
     latest["ema50"],
     latest["ema200"],
@@ -59,8 +59,32 @@ signal, confidence = get_signal(
     structure
 )
 
-print(f"Signal: {signal}")
-print(f"Confidence: {confidence}%")
+print("\n===== SIGNAL =====")
+print(f"SIGNAL: {signal}")
+print(f"CONFIDENCE: {confidence}%")
+
+print("\nReasons:")
+for reason in reasons:
+    print(f"✓ {reason}")
+
+    print("\n===== MARKET BIAS =====")
+
+if confidence >= 70:
+    strength = "STRONG"
+elif confidence >= 40:
+    strength = "MODERATE"
+else:
+    strength = "WEAK"
+
+if signal == "BUY":
+    bias = "BULLISH"
+elif signal == "SELL":
+    bias = "BEARISH"
+else:
+    bias = "MIXED"
+
+print(f"Market Bias: {bias}")
+print(f"Signal Strength: {strength}")
 
 print("\n===== TRADE PLAN =====")
 
